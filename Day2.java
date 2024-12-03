@@ -7,11 +7,11 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class DayTwo {
+public class Day2 {
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("DayTwo.in"));
-        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("DayTwo.out")));
+        BufferedReader br = new BufferedReader(new FileReader("Day2.in"));
+        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("Day2.out")));
         int count = 0;
         while (br.ready()) {
             StringTokenizer st = new StringTokenizer(br.readLine());
