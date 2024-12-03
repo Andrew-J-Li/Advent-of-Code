@@ -17,8 +17,18 @@ public class Day3 {
 
         long sum = 0;
         String itr = str.toString();
+        boolean enable = true;
         for (int i = 0; i + 4 <= itr.length(); i++) {
-            if (itr.substring(i, i + 4).equals("mul(")) {
+            if (itr.substring(i, i + 4).equals("do()")) {
+                enable = true;
+                continue;
+            }
+
+            if (i + 7 <= itr.length() && itr.substring(i, i + 7).equals("don't()")) {
+                enable = false;
+                continue;
+            }
+            if (enable && itr.substring(i, i + 4).equals("mul(")) {
                 int temp = i + 4;
                 if (!(temp < itr.length())) continue;
                 if (Character.isDigit(itr.charAt(temp))) temp++;
