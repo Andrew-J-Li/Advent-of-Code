@@ -38,9 +38,9 @@ public class Day1 {
 
         Collections.sort(arr1, (Pair a, Pair b) -> (a.val == b.val) ? a.index - b.index : a.val - b.val);
         Collections.sort(arr2, (Pair a, Pair b) -> (a.val == b.val) ? a.index - b.index : a.val - b.val);
-        long sum = 0;
+        // long sum = 0;
         for (int i = 0; i < arr1.size(); i++) {
-            sum += Math.abs(arr1.get(i).val - arr2.get(i).val);
+            // sum += Math.abs(arr1.get(i).val - arr2.get(i).val);
         }
 
         HashSet<Integer> hs = new HashSet<>();
