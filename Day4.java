@@ -19,18 +19,30 @@ public class Day4 {
         }
 
         count = 0;
+        int rslt2 = 0;
         for (int i = 0; i < test.size(); i++) {
             for (int j = 0; j < test.get(i).length(); j++) {
-                if (test.get(i).charAt(j) == 'X') {
-                    boolean[][] visited = new boolean[test.size()][test.get(i).length()];
-                    for (int dir = 0; dir <= 7; dir++) {
-                        if (recurse(i, j, test, 'X', visited, dir)) count++;
+                if (test.get(i).charAt(j) == 'A') {
+                    int u = i - 1;
+                    int d = i + 1;
+                    int r = j + 1;
+                    int l = j - 1;
+                    if (u < 0 || l < 0 || d >= test.size() || r >= test.get(i).length()) {
+                        continue;
                     }
+                    boolean left = false;
+                    boolean right = false;
+                    if ((test.get(u).charAt(l) == 'M' && test.get(d).charAt(r) == 'S') || (test.get(u).charAt(l) == 'S' && test.get(d).charAt(r) == 'M')) left = true;
+                    if ((test.get(u).charAt(r) == 'M' && test.get(d).charAt(l) == 'S') || (test.get(u).charAt(r) == 'S' && test.get(d).charAt(l) == 'M')) right = true;
+                    if (left && right) rslt2++;
+
                 }
             }
         }
+        boolean[][] bw = new boolean[1][1];
+        recurse(0, 0, test, 'A', bw, 0);
 
-        pw.println(count);
+        pw.println(rslt2);
         br.close();
         pw.close();
     }
