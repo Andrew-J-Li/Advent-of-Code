@@ -37,13 +37,14 @@ public class Day7 {
     public static boolean validate(String[] test, int curr, BigInteger prev) {
         BigInteger total1 = prev.add(new BigInteger(test[curr]));
         BigInteger total2 = prev.multiply(new BigInteger(test[curr]));
+        BigInteger total3 = new BigInteger(prev.toString() + test[curr]);
 
         if (curr == test.length - 1) {
-            if (total1.equals(new BigInteger(test[0])) || total2.equals(new BigInteger(test[0]))) return true;
+            if (total1.equals(new BigInteger(test[0])) || total2.equals(new BigInteger(test[0])) || total3.equals(new BigInteger(test[0]))) return true;
             else return false;
         }
 
-        return validate(test, curr + 1, total1) || validate(test, curr + 1, total2);
+        return validate(test, curr + 1, total1) || validate(test, curr + 1, total2) || validate(test, curr + 1, total3);
 
     }
 }
