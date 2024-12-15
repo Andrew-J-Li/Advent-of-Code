@@ -36,32 +36,22 @@ public class Day6 {
         else if (go == 'v') dir = 2;
         else if (go == '<') dir = 3;
         grid[x][y] = '.';
-        int rslt = 1;
+        int[][] dirs = new int[grid.length][grid[0].length];
+        dirs[x][y] = dir;
+        int rslt = 0;
 
-        for (int i = 0; i < 1000000; i++) {
-            if (dir == 0) {
-                if (x - 1 < 0) break;
-                else if (grid[x - 1][y] == '#') dir++;
-                else x--;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == '#' || (i == x && j == y)) continue;
+                grid[i][j] = '#';
+                if (verify(x, y, dir, grid, dirs)) rslt++;
+                grid[i][j] = '.';
+                for (int a = 0; a < grid.length; a++) {
+                    for (int b = 0; b < grid[a].length; b++) {
+                        if (grid[a][b] == 'X') grid[a][b] = '.';
+                    }
+                }
             }
-            else if (dir == 1) {
-                if (y + 1 >= grid[x].length) break;
-                else if (grid[x][y + 1] == '#') dir++;
-                else y++;
-            }
-            else if (dir == 2) {
-                if (x + 1 >= grid[x].length) break;
-                else if (x + 1 >= grid[x].length || grid[x + 1][y] == '#') dir++;
-                else x++;
-            }
-            else {
-                if (y - 1 < 0) break;
-                else if (grid[x][y - 1] == '#') dir = 0;
-                else y--;
-            }
-            
-            if (grid[x][y] != 'X') rslt++;
-            grid[x][y] = 'X';
         }
 
         pw.println(rslt);
@@ -69,5 +59,50 @@ public class Day6 {
         pw.close();
         br.close();
     }
-    
+
+
+    public static boolean verify(int x, int y, int dir, char[][] grid, int[][] dirs) {
+        while (true) {
+            if (dir == 0) {
+                if (x - 1 < 0) break;
+                else if (grid[x - 1][y] == '#') {
+                    dir++;
+                    continue;
+                }
+                else x--;
+            }
+            else if (dir == 1) {
+                if (y + 1 >= grid[x].length) break;
+                else if (grid[x][y + 1] == '#') {
+                    dir++;
+                    continue;
+                }
+                else y++;
+            }
+            else if (dir == 2) {
+                if (x + 1 >= grid[x].length) break;
+                else if (grid[x + 1][y] == '#') {
+                    dir++;
+                    continue;
+                }
+                else x++;
+            }
+            else {
+                if (y - 1 < 0) break;
+                else if (grid[x][y - 1] == '#') {
+                    dir = 0;
+                    continue;
+                }
+                else y--;
+            }
+            
+            if (grid[x][y] == 'X' && dirs[x][y] == dir) return true;
+
+            dirs[x][y] = dir;
+            grid[x][y] = 'X';
+        }
+
+        return false;
+    }
 }
+
