@@ -38,6 +38,10 @@ public class Day8 {
                     Point p2 = entry.getValue().get(j);
                     int dx = (int) Math.abs(p1.getX() - p2.getX());
                     int dy = (int) Math.abs(p1.getY() - p2.getY());
+                    int addX = dx;
+                    int addY = dy;
+                    dx = 0;
+                    dy = 0;
 
                     Point n1 = new Point();
                     Point n2 = new Point();
@@ -57,8 +61,29 @@ public class Day8 {
                         n2.y = p2.y - dy;
                     }
 
-                    if (n1.x >= 0 && n1.x < input.size() && n1.y >= 0 && n1.y < input.get(0).length()) nodes.add(n1);
-                    if (n2.x >= 0 && n2.x < input.size() && n2.y >= 0 && n2.y < input.get(0).length()) nodes.add(n2);
+                    while ((n1.x >= 0 && n1.x < input.size() && n1.y >= 0 && n1.y < input.get(0).length()) || (n2.x >= 0 && n2.x < input.size() && n2.y >= 0 && n2.y < input.get(0).length())) {
+                        if ((n1.x >= 0 && n1.x < input.size()) && (n1.y >= 0 && n1.y < input.get(0).length())) nodes.add(n1);
+                        if ((n2.x >= 0 && n2.x < input.size()) && (n2.y >= 0 && n2.y < input.get(0).length())) nodes.add(n2);
+                        dx += addX;
+                        dy += addY;
+                        n1 = new Point();
+                        n2 = new Point();
+                        if (p1.getX() < p2.getX()) {
+                            n1.x = p1.x - dx;
+                            n2.x = p2.x + dx;
+                        } else {
+                            n1.x = p1.x + dx;
+                            n2.x = p2.x - dx;
+                        }
+
+                        if (p1.getY() < p2.getY()) {
+                            n1.y = p1.y - dy;
+                            n2.y = p2.y + dy;
+                        } else {
+                            n1.y = p1.y + dy;
+                            n2.y = p2.y - dy;
+                        }
+                    }
                 }
             }
         }
