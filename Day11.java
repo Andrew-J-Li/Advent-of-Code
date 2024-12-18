@@ -179,10 +179,6 @@ import java.util.stream.*;
 
 public class Day11 {
 
-    private static final int YEAR = 2024;
-    private static final int DAY = 11;
-    private static final String SEPARATOR = " ";
-
     public static List<String> stepStone(String s) {
         if ("0".equals(s)) {
             return Collections.singletonList("1");
